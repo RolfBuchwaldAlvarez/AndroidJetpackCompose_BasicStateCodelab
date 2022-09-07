@@ -16,7 +16,9 @@ fun WellnessScreen(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
-        StatefulWaterCounter(modifier = Modifier.padding(16.dp))
+        StatefulWaterCounter(
+            modifier = modifier.padding(horizontal = 8.dp)
+        )
 
         val list = remember { getWellnessTasks().toMutableStateList() }
         WellnessTasksList(

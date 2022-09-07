@@ -1,6 +1,9 @@
 package de.rbuchwald.basicstatecodelab
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -15,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun StatefulWellnessTaskItem(
@@ -23,7 +27,6 @@ fun StatefulWellnessTaskItem(
     onClose: () -> Unit
 ) {
     var isChecked by rememberSaveable { mutableStateOf(false) }
-    // var hideOnClick by rememberSaveable { mutableStateOf(false) }
 
     StatelessWellnessTaskItem(
         modifier = modifier,
@@ -44,16 +47,24 @@ fun StatelessWellnessTaskItem(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
         modifier = modifier
     ) {
         Text(
             text = taskName,
             modifier = Modifier
+                .padding(start = 16.dp)
                 .weight(1f)
         )
-        Checkbox(checked = isChecked, onCheckedChange = onCheckedChange)
-        IconButton(onClick = onClose) {
-            Icon(imageVector = Icons.Filled.Close, contentDescription = "Close")
+        Spacer(modifier = Modifier.weight(1f))
+        Row(
+            modifier = Modifier.weight(1f),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Checkbox(checked = isChecked, onCheckedChange = onCheckedChange)
+            IconButton(onClick = onClose) {
+                Icon(imageVector = Icons.Filled.Close, contentDescription = "Close")
+            }
         }
     }
 }

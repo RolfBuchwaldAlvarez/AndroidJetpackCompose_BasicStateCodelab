@@ -2,6 +2,7 @@ package de.rbuchwald.basicstatecodelab
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -37,9 +38,12 @@ fun StatelessWaterCounter(
     onIncrementCount: () -> Unit,
     onResetCountAndShowTask: () -> Unit,
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier
+        .fillMaxWidth()
+    ) {
         if (glassCount > 0) {
             Text(
+                modifier = Modifier.padding(start = 16.dp, top = 24.dp, end = 16.dp),
                 text = if (glassCount == 1)
                     "You've had $glassCount glass of water."
                 else
@@ -48,7 +52,7 @@ fun StatelessWaterCounter(
         }
         Row {
             Button(
-                modifier = Modifier.padding(top = 16.dp, end = 16.dp, bottom = 16.dp),
+                modifier = Modifier.padding(16.dp),
                 onClick = onIncrementCount,
                 enabled = glassCount < 10
             ) {
@@ -58,7 +62,6 @@ fun StatelessWaterCounter(
                 modifier = Modifier.padding(16.dp),
                 enabled = glassCount != 0,
                 onClick = onResetCountAndShowTask
-                // onResetShowTask
             ) {
                 Text(text = "Clear $drinkType count")
             }
