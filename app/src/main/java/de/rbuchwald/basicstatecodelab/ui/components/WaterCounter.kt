@@ -1,4 +1,4 @@
-package de.rbuchwald.basicstatecodelab
+package de.rbuchwald.basicstatecodelab.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

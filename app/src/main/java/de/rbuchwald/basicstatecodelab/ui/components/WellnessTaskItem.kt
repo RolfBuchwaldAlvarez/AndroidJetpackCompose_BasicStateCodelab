@@ -1,4 +1,4 @@
-package de.rbuchwald.basicstatecodelab
+package de.rbuchwald.basicstatecodelab.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,22 +17,22 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun StatefulWellnessTaskItem(
     modifier: Modifier = Modifier,
     taskName: String,
+    isChecked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
     onClose: () -> Unit
 ) {
-    var isChecked by rememberSaveable { mutableStateOf(false) }
-
+    // var isChecked by rememberSaveable { mutableStateOf(false) }
     StatelessWellnessTaskItem(
         modifier = modifier,
         isChecked = isChecked,
         taskName = taskName,
-        onCheckedChange = { newValue -> isChecked = newValue },
+        onCheckedChange = onCheckedChange,
         onClose = onClose
     )
 }
@@ -67,13 +67,4 @@ fun StatelessWellnessTaskItem(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun StatefulWellnessTaskItemPreview() {
-    StatefulWellnessTaskItem(
-        taskName = "Task # 0",
-        onClose = {}
-    )
 }

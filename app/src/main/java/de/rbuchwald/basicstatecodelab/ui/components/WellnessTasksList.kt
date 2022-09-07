@@ -1,16 +1,17 @@
-package de.rbuchwald.basicstatecodelab
+package de.rbuchwald.basicstatecodelab.ui.components
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import de.rbuchwald.basicstatecodelab.data.model.WellnessTask
 
 @Composable
 fun WellnessTasksList(
     modifier: Modifier = Modifier,
     list: List<WellnessTask>,
-    onCloseTask: (WellnessTask) -> Unit
+    onCheckedTask: (WellnessTask, Boolean) -> Unit,
+    onClose: (WellnessTask) -> Unit
 ) {
     LazyColumn(modifier = modifier) {
         items(
@@ -19,19 +20,10 @@ fun WellnessTasksList(
         ) { task ->
             StatefulWellnessTaskItem(
                 taskName = task.label,
-                onClose = { onCloseTask(task) }
+                isChecked = task.isChecked,
+                onCheckedChange = { isChecked -> onCheckedTask(task, isChecked) },
+                onClose = { onClose(task) }
             )
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun WellnessTaskPreview() {
-    WellnessTasksList(
-        list = getWellnessTasks(),
-        onCloseTask = {}
-    )
-}
-
-private fun getWellnessTasks() = List(30) { i -> WellnessTask(i, "Task # $i") }
